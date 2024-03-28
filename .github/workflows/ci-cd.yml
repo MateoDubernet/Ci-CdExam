@@ -39,9 +39,9 @@ jobs:
           echo test, and deploy your project.
 
       - name: Install dependences
-        run: npm install
+        run: npm install --prefix ./todo-list
 
       - name: Test
-        run: npm test
+        run: npm test --prefix ./todo-list
 
       
