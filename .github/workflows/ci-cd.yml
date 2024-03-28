@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: CI/CD Workflow
 
 # Controls when the workflow will run
 on:
@@ -23,10 +23,12 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 18
+      - name: Checkout code
+      uses: actions/checkout@v2
+
+      # - uses: actions/setup-node@v4
+      #   with:
+      #     node-version: 18
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
@@ -38,10 +40,26 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
 
-      - name: Install dependences
+      - name: Install dependencies
         run: npm install
 
-      - name: Test
+      - name: Run tests
         run: npm test
+
+      - name: Build application
+        run: npm run build
+
+      - name: Deploy to staging server
+        uses: appleboy/ssh-action@v2
+        with:
+          host: ${{ secrets.STAGING_SERVER_HOST }}
+          username: ${{ secrets.STAGING_SERVER_USERNAME }}
+          password: ${{ secrets.STAGING_SERVER_PASSWORD }}
+          script: |
+            cd /path/to/your/application
+            git pull origin main
+            npm install
+            npm run build
+            # Restart your application server
 
       
