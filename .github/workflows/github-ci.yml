@@ -42,13 +42,13 @@ jobs:
       - name: Test
         run: npm test --prefix ./todo-list
 
-      - name: executing remote ssh commands using password
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
-          port: ${{ secrets.PORT }}
-          script: whoami
+      # - name: executing remote ssh commands using password
+       # uses: appleboy/ssh-action@v1.0.3
+       # with:
+       #   host: ${{ secrets.HOST }}
+       #   username: ${{ secrets.USERNAME }}
+       #   password: ${{ secrets.PASSWORD }}
+       #   port: ${{ secrets.PORT }}
+       #   script: whoami
 
       
